@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.model.Product;
+import com.service.ProductService;
 import com.service.ProductServiceImpl;
 
 @RestController
@@ -21,11 +22,11 @@ import com.service.ProductServiceImpl;
 public class ProductController {
 
 	@Autowired
-	private ProductServiceImpl productServiceImpl;
+	private ProductService productService;
 	
 	@PostMapping("/addProduct")
 	public ResponseEntity<Product> addProduct(@RequestBody Product product){
-		Product prod = productServiceImpl.addProduct(product);
+		Product prod = productService.addProduct(product);
 		if(prod != null)
 			return new ResponseEntity<>(prod, HttpStatus.OK);
 		else
@@ -34,7 +35,7 @@ public class ProductController {
 	
 	@GetMapping("/getAllProduct")
 	public ResponseEntity<List<Product>> getAllProduct(){
-		List<Product> prod = productServiceImpl.getAllProduct();
+		List<Product> prod = productService.getAllProduct();
 		if(prod != null)
 			return new ResponseEntity<>(prod, HttpStatus.OK);
 		else
@@ -43,23 +44,23 @@ public class ProductController {
 	
 	@DeleteMapping("/deleteSingleProduct/{id}")
 	public void deleteSingleProduct(@PathVariable Long id) {
-		productServiceImpl.deleteSingleProduct(id);
+		productService.deleteSingleProduct(id);
 	}
 	
 	@DeleteMapping("/deleteAllProduct")
 	public void deleteAllProduct() {
-		productServiceImpl.deleteAllProduct();
+		productService.deleteAllProduct();
 	}
 	
 	@DeleteMapping("/deleteByCategory")
 	public ResponseEntity<Boolean> deleteByCategory(@PathVariable String category) {
-		productServiceImpl.deleteByCategory(category);
+		productService.deleteByCategory(category);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@GetMapping("/findByCategory")
 	public ResponseEntity<List<Product>> findByCategory(@PathVariable String category){
-		List<Product> prod = productServiceImpl.findByCategory(category);
+		List<Product> prod = productService.findByCategory(category);
 		if(prod != null)
 			return new ResponseEntity<>(prod, HttpStatus.OK);
 		else

@@ -11,17 +11,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.model.Orders;
+import com.service.OrdersService;
 import com.service.OrdersServiceImpl;
 
 @RestController
 public class OrdersController {
 
 	@Autowired
-	private OrdersServiceImpl orderServiceImpl;
+	private OrdersService orderService;
 	
 	@PostMapping("/getAllOrders")
 	public ResponseEntity<List<Orders>> getAllOrders(){
-		List<Orders> orders = orderServiceImpl.getAllOrders();
+		List<Orders> orders = orderService.getAllOrders();
 		if(orders != null)
 			return new ResponseEntity<>(orders, HttpStatus.OK);
 		else
@@ -30,7 +31,7 @@ public class OrdersController {
 	
 	@GetMapping("/findByOrderId/{id}")
 	public ResponseEntity<Orders> findByOrderId(@PathVariable Long id){
-		Orders orders = orderServiceImpl.findOrderById(id);
+		Orders orders = orderService.findOrderById(id);
 		if(orders != null)
 			return new ResponseEntity<>(orders, HttpStatus.OK);
 		else
@@ -39,7 +40,7 @@ public class OrdersController {
 	
 	@GetMapping("/findByOrderId/{id}")
 	public ResponseEntity<String> orderStatus(@PathVariable Long id){
-		String status = orderServiceImpl.status(id);
+		String status = orderService.status(id);
 		if(status != null)
 			return new ResponseEntity<>(status, HttpStatus.OK);
 		else

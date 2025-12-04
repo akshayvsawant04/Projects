@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.model.Customer;
+import com.service.CustomerService;
 import com.service.CustomerServiceImpl;
 
 @RestController
@@ -19,11 +20,11 @@ import com.service.CustomerServiceImpl;
 public class CustomerController {
 
 	@Autowired
-	private CustomerServiceImpl customerServiceImpl;
+	private CustomerService customerService;
 
 	@PostMapping("/createCustomer")
 	public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer){
-		Customer cust = customerServiceImpl.createCustomer(customer);
+		Customer cust = customerService.createCustomer(customer);
 		if(cust != null)
 			return new ResponseEntity<>(cust,HttpStatus.CREATED);
 		else
@@ -32,7 +33,7 @@ public class CustomerController {
 	
 	@PutMapping("/updateCustomer")
 	public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer){
-		Customer cust = customerServiceImpl.updateCustomer(customer);
+		Customer cust = customerService.updateCustomer(customer);
 		if(cust != null)
 			return new ResponseEntity<>(cust,HttpStatus.CREATED);
 		else
@@ -41,7 +42,7 @@ public class CustomerController {
 	
 	@GetMapping("/findCustomerById/{id}")
 	public ResponseEntity<Customer> getCustomerById(@PathVariable Long id){
-		Customer cust = customerServiceImpl.getCustomerById(id);
+		Customer cust = customerService.getCustomerById(id);
 		if(cust != null)
 			return new ResponseEntity<>(cust,HttpStatus.OK);
 		else
@@ -53,7 +54,7 @@ public class CustomerController {
 	
 	@DeleteMapping("/deleteCustomer/{id}")
 	public void deleteCustomer(@PathVariable Long id) {
-		customerServiceImpl.deleteCustomer(id);
+		customerService.deleteCustomer(id);
 	}
 
 }
