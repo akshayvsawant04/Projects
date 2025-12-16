@@ -15,9 +15,15 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private ProductRepository productRepository;
 
+	
+//	@Override
+//	public List<Product> addProduct(Product product) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 	@Override
-	public Product addProduct(Product product) {
-		return productRepository.save(product);
+	public List<Product> addProduct(List<Product> product) {
+		return productRepository.saveAll(product);
 	}
 
 	@Override

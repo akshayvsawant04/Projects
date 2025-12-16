@@ -18,27 +18,22 @@ public class Payment {
 	private String paymentMode;
 	private Double amountPaid;
 	private Date paymentDate;
-	
+	 
 	@OneToOne
 	@JoinColumn(name="order_id")
 	private Orders orders;
-	
-	@OneToOne
-	@JoinColumn(name="customer_id")
-	private Customer customer;
 
 	public Payment() {
 		super();
 	}
 
-	public Payment(Long id, String paymentMode, Double amountPaid, Date paymentDate, Orders orders, Customer customer) {
+	public Payment(Long id, String paymentMode, Double amountPaid, Date paymentDate, Orders orders) {
 		super();
 		this.id = id;
 		this.paymentMode = paymentMode;
 		this.amountPaid = amountPaid;
 		this.paymentDate = paymentDate;
 		this.orders = orders;
-		this.customer = customer;
 	}
 
 	public Long getId() {
@@ -79,14 +74,6 @@ public class Payment {
 
 	public void setOrders(Orders orders) {
 		this.orders = orders;
-	}
-
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
 	}
 
 }

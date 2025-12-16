@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.model.Customer;
 import com.service.CustomerService;
-import com.service.CustomerServiceImpl;
 
 @RestController
 @RequestMapping("/customer")

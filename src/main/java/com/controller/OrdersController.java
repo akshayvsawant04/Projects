@@ -8,13 +8,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.model.Orders;
 import com.service.OrdersService;
-import com.service.OrdersServiceImpl;
 
 @RestController
+@RequestMapping("/orders")
 public class OrdersController {
 
 	@Autowired
@@ -38,7 +39,7 @@ public class OrdersController {
 			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
 	}
 	
-	@GetMapping("/findByOrderId/{id}")
+	@GetMapping("/findOrderStatus/{id}")
 	public ResponseEntity<String> orderStatus(@PathVariable Long id){
 		String status = orderService.status(id);
 		if(status != null)

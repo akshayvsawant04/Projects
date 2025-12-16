@@ -6,7 +6,7 @@ import com.model.Product;
 
 public interface ProductService {
 
-	public Product addProduct(Product product);
+	public List<Product> addProduct(List<Product> product);
 	
 	public List<Product> getAllProduct();
 	

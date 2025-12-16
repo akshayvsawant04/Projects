@@ -15,7 +15,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 
 @Entity
 public class Customer {
@@ -40,17 +39,13 @@ public class Customer {
 	@JsonManagedReference
 	private List<Orders> orders;
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name="payment_id")
-	private Payment payment;
-
 	public Customer() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	public Customer(Long id, String firstName, String middleName, String lastName, String fullName, String email,
-			Long phoneNumber, Date dateOfBirth, List<Address> address, List<Orders> orders, Payment payment) {
+			Long phoneNumber, Date dateOfBirth, List<Address> address, List<Orders> orders) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -62,7 +57,6 @@ public class Customer {
 		this.dateOfBirth = dateOfBirth;
 		this.address = address;
 		this.orders = orders;
-		this.payment = payment;
 	}
 
 	public Long getId() {
@@ -143,14 +137,6 @@ public class Customer {
 
 	public void setOrders(List<Orders> orders) {
 		this.orders = orders;
-	}
-
-	public Payment getPayment() {
-		return payment;
-	}
-
-	public void setPayment(Payment payment) {
-		this.payment = payment;
 	}
 
 }
